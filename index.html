@@ -13,297 +13,381 @@
       --muted: #ffd8a6;
       --highlight: #6bf2ff;
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: 'Comic Sans MS', cursive, sans-serif;
       background: radial-gradient(circle at top, #0a1f3f, #08112b);
       color: var(--text);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 24px;
-      overflow: hidden;
-      position: relative;
+      padding: 16px;
+      overflow-y: auto;
     }
+
     h1.main-title {
-      font-size: 40px;
+      font-size: 6vw;
       color: var(--accent2);
-      text-shadow: 0 0 20px var(--accent), 0 0 30px var(--highlight);
-      margin-bottom: 40px;
       text-align: center;
+      text-shadow: 0 0 20px var(--accent), 0 0 30px var(--highlight);
+      margin-bottom: 24px;
     }
 
     .slider {
       width: 100%;
       max-width: 520px;
-      position: relative;
+      margin: 0 auto;
       text-align: center;
       background: rgba(255,255,255,0.05);
-      border-radius: 28px;
-      padding: 80px 20px 40px 20px;
+      border-radius: 20px;
+      padding: 40px 16px 24px 16px;
       box-shadow: 0 0 40px 20px rgba(255,215,0,0.7);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       overflow: hidden;
     }
 
-    .slides { width: 100%; }
+    .slides { overflow: hidden; }
+
     .slide {
       display: none;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
       position: relative;
-      width: 100%;
-      min-height: 0;
-      overflow-wrap: break-word;
-      word-break: break-word;
+      word-wrap: break-word;
     }
-    .slide.active { display: flex; }
+
+    .slide.active {
+      display: flex;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
     .avatar {
-      width: 160px;
-      height: 160px;
+      width: 30vw;
+      height: 30vw;
+      max-width: 160px;
+      max-height: 160px;
       border-radius: 50%;
-      border: 4px solid var(--accent2);
-      overflow: visible;
-      margin-bottom: 20px;
-      box-shadow: 0 0 15px 8px var(--accent2), 0 0 20px 10px var(--highlight);
+      border: 2px solid var(--accent2);
+      margin-bottom: 16px;
+      box-shadow: 0 0 10px 5px var(--accent2), 0 0 15px 7px var(--highlight);
       background: radial-gradient(circle at center, #ffe066, #ff4c6b);
-      position: relative;
-      z-index: 1;
+      overflow: hidden;
     }
-    .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 50%; }
 
-    h2 { margin: 0 0 8px; font-size: 28px; color: var(--accent2); text-shadow: 0 0 16px var(--accent), 0 0 24px var(--highlight); }
-    .subtitle { font-size: 30px; color: var(--accent); margin-bottom: 8px; text-shadow: 0 0 8px var(--highlight); word-break: break-word; }
-    .caption { font-size: 18px; color: var(--muted); line-height: 1.4; max-width: 100%; overflow-wrap: break-word; word-break: break-word; max-height: 180px; overflow-y: auto; }
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 50%;
+    }
 
-    .controls { display: flex; justify-content: space-between; margin-top: 24px; z-index: 2; width: 100%; position: relative; }
-    .btn { background: linear-gradient(145deg, var(--accent), var(--accent2)); border: none; color: var(--text); padding: 12px 18px; border-radius: 16px; cursor: pointer; font-weight: bold; font-size: 16px; text-shadow: 0 0 6px #000; }
-    .pager { display: flex; justify-content: center; gap: 10px; margin-top: 14px; z-index: 2; position: relative; }
-    .dot { width: 16px; height: 16px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; box-shadow: 0 0 10px rgba(255,255,255,0.3); }
-    .dot.active { background: var(--accent2); box-shadow: 0 0 16px var(--accent2), 0 0 24px var(--accent); }
+    h2 {
+      margin: 0 0 4px;
+      font-size: 5vw;
+      color: var(--accent2);
+      text-shadow: 0 0 12px var(--accent), 0 0 16px var(--highlight);
+    }
 
-    /* Snow */
-    .snowflake { position: absolute; top: -10px; width: 8px; height: 8px; background: white; border-radius: 50%; opacity: 0.8; pointer-events: none; animation-name: fall; animation-timing-function: linear; animation-iteration-count: infinite; }
-    @keyframes fall { to { transform: translateY(100vh); } }
+    .subtitle {
+      font-size: 4vw;
+      color: var(--accent);
+      margin-bottom: 4px;
+      text-shadow: 0 0 6px var(--highlight);
+    }
+
+    .caption {
+      font-size: 3.5vw;
+      color: var(--muted);
+      line-height: 1.4;
+      max-width: 90%;
+      text-shadow: 0 0 4px rgba(0,0,0,0.5);
+      word-wrap: break-word;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .btn {
+      background: linear-gradient(145deg, var(--accent), var(--accent2));
+      border: none;
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+      text-shadow: 0 0 4px #000;
+    }
+
+    .pager {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 12px;
+      z-index: 2;
+      position: relative;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      cursor: pointer;
+      box-shadow: 0 0 6px rgba(255,255,255,0.3);
+    }
+
+    .dot.active {
+      background: var(--accent2);
+      box-shadow: 0 0 12px var(--accent2), 0 0 16px var(--accent);
+    }
+
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      pointer-events: none;
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes fall {
+      to { transform: translateY(100vh); }
+    }
   </style>
 </head>
 <body>
 
-  <h1 class="main-title">Срамная попка - итоги 2025 кускогода</h1>
+<h1 class="main-title">Срамная попка - итоги 2025 кускогода</h1>
 
-  <main class="slider">
-    <div class="slides" id="slides">
-      
-      <section class="slide" data-index="0">
-        <div class="avatar">
-          <img src="images/1.jpg" alt="Аватар Всего сообщений" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
-        </div>
-        <h2>Всего сообщений</h2>
-        <div class="subtitle">32388 сообщений</div>
-        <div class="caption">было написано в срамной жопе за год</div>
-      </section>
-      
-      <section class="slide" data-index="1">
-        <div class="avatar">
-          <img src="images/user1220242233.jpg" alt="Аватар Самый активный" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
-        </div>
-        <h2>Самый активный</h2>
-        <div class="subtitle">10599</div>
-        <div class="caption">сообщений за год</div>
-      </section>
-      
-      <section class="slide" data-index="2">
-        <div class="avatar">
-          <img src="images/user1088262082.jpg" alt="Аватар Самый молчаливый :(" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
-        </div>
-        <h2>Самый молчаливый :(</h2>
-        <div class="subtitle">30</div>
-        <div class="caption">всего сообщений за год</div>
-      </section>
-      
-      <section class="slide" data-index="3">
-        <div class="avatar">
-          <img src="images/user1296883587.jpg" alt="Аватар Первое сообщение в этом году" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
-        </div>
-        <h2>Первое сообщение в этом году</h2>
-        <div class="subtitle">2025-01-01 00:00:20</div>
-        <div class="caption">КУСКИ С НОВЫМ 2025 ГОДОМ! БУДЬТЕ ЗДОРОВЫ И ЧТОБ ДЕНЬГИ ВОДИЛИСЬ
+<main class="slider">
+  <div class="slides" id="slides">
+    
+    <section class="slide" data-index="0">
+      <div class="avatar">
+        <img src="images/1.jpg" alt="Аватар Всего сообщений" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
+      </div>
+      <h2>Всего сообщений</h2>
+      <div class="subtitle">32388 сообщений</div>
+      <div class="caption">было написано в срамной жопе за год</div>
+    </section>
+    
+    <section class="slide" data-index="1">
+      <div class="avatar">
+        <img src="images/user1220242233.jpg" alt="Аватар Самый активный" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
+      </div>
+      <h2>Самый активный</h2>
+      <div class="subtitle">10599</div>
+      <div class="caption">сообщений за год</div>
+    </section>
+    
+    <section class="slide" data-index="2">
+      <div class="avatar">
+        <img src="images/user1088262082.jpg" alt="Аватар Самый молчаливый :(" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
+      </div>
+      <h2>Самый молчаливый :(</h2>
+      <div class="subtitle">30</div>
+      <div class="caption">всего сообщений за год</div>
+    </section>
+    
+    <section class="slide" data-index="3">
+      <div class="avatar">
+        <img src="images/user1296883587.jpg" alt="Аватар Первое сообщение в этом году" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
+      </div>
+      <h2>Первое сообщение в этом году</h2>
+      <div class="subtitle">2025-01-01 00:00:20</div>
+      <div class="caption">КУСКИ С НОВЫМ 2025 ГОДОМ! БУДЬТЕ ЗДОРОВЫ И ЧТОБ ДЕНЬГИ ВОДИЛИСЬ
 ЗА НАС🥂🍾</div>
-      </section>
-      
-      <section class="slide" data-index="4">
-        <div class="avatar">
-          <img src="images/user1220242233.jpg" alt="Аватар Айпад-кид года" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
-        </div>
-        <h2>Айпад-кид года</h2>
-        <div class="subtitle">67</div>
-        <div class="caption">скинул тиктоков за год</div>
-      </section>
-      
-      <section class="slide" data-index="5">
-        <div class="avatar">
-          <img src="images/user1097835763.jpg" alt="Аватар Король подкастов" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
-        </div>
-        <h2>Король подкастов</h2>
-        <div class="subtitle">1013</div>
-        <div class="caption">кружков записано за год</div>
-      </section>
-      
-      <section class="slide" data-index="6">
-        <div class="avatar">
-          <img src="images/user1220242233.jpg" alt="Аватар Фотограф года" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
-        </div>
-        <h2>Фотограф года</h2>
-        <div class="subtitle">640 фото</div>
-        <div class="caption">скинул больше всех фото за год</div>
-      </section>
-      
-      <section class="slide" data-index="7">
-        <div class="avatar">
-          <img src="images/user1810121331.jpg" alt="Аватар Самый длинный рассказчик" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
-        </div>
-        <h2>Самый длинный рассказчик</h2>
-        <div class="subtitle">58 символов в среднем</div>
-        <div class="caption">пишет самые длинные сообщения</div>
-      </section>
-      
-      <section class="slide" data-index="8">
-        <div class="avatar">
-          <img src="images/user1220242233.jpg" alt="Аватар Чемпион по дням" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
-        </div>
-        <h2>Чемпион по дням</h2>
-        <div class="subtitle">316 дней активности</div>
-        <div class="caption">писал почти каждый день в году</div>
-      </section>
-      
-      <section class="slide" data-index="9">
-        <div class="avatar">
-          <img src="images/user1220242233.jpg" alt="Аватар Они любили сплетничать" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
-        </div>
-        <h2>Они любили сплетничать</h2>
-        <div class="subtitle">560</div>
-        <div class="caption">переслал сообщений за год</div>
-      </section>
-      
-      <section class="slide" data-index="10">
-        <div class="avatar">
-          <img src="images/user1097835763.jpg" alt="Аватар Любимец чата" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
-        </div>
-        <h2>Любимец чата</h2>
-        <div class="subtitle">54 упоминаний @ddavidok</div>
-        <div class="caption">его чаще всех тегали через @</div>
-      </section>
-      
-      <section class="slide" data-index="11">
-        <div class="avatar">
-          <img src="images/user774725636.jpg" alt="Аватар Тихий согл..." onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
-        </div>
-        <h2>Тихий согл...</h2>
-        <div class="subtitle">1585 реакций</div>
-        <div class="caption">поставил больше всех реакций за год</div>
-      </section>
-      
-      <section class="slide" data-index="12">
-        <div class="avatar">
-          <img src="images/user1220242233.jpg" alt="Аватар Приз зрительских симпатий" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
-        </div>
-        <h2>Приз зрительских симпатий</h2>
-        <div class="subtitle">1512 реакций</div>
-        <div class="caption">получил больше всего реакций за год</div>
-      </section>
-      
-      <section class="slide" data-index="13">
-        <div class="avatar">
-          <img src="images/user1296883587.jpg" alt="Аватар Миллинеал года" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
-        </div>
-        <h2>Миллинеал года</h2>
-        <div class="subtitle">427 эмодзи</div>
-        <div class="caption">использовал эмодзи в этом году</div>
-      </section>
-      
-      <section class="slide" data-index="14">
-        <div class="avatar">
-          <img src="images/1.jpg" alt="Аватар Ты умрешь и т.д." onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
-        </div>
-        <h2>Ты умрешь и т.д.</h2>
-        <div class="subtitle">эмоджи ☠</div>
-        <div class="caption">использовался 123 раз</div>
-      </section>
-      
-      <section class="slide" data-index="15">
-        <div class="avatar">
-          <img src="images/user1097835763.jpg" alt="Аватар Коллекционер стикеров" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
-        </div>
-        <h2>Коллекционер стикеров</h2>
-        <div class="subtitle">90 стикеров</div>
-        <div class="caption">отправил стикеров за год</div>
-      </section>
-      
-      <section class="slide" data-index="16">
-        <div class="avatar">
-          <img src="images/1.jpg" alt="Аватар Базарили больше всего" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
-        </div>
-        <h2>Базарили больше всего</h2>
-        <div class="subtitle">Tuesday, 7 January</div>
-        <div class="caption">912 сообщений за день</div>
-      </section>
-      
-    </div>
+    </section>
+    
+    <section class="slide" data-index="4">
+      <div class="avatar">
+        <img src="images/user1220242233.jpg" alt="Аватар Айпад-кид года" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
+      </div>
+      <h2>Айпад-кид года</h2>
+      <div class="subtitle">67</div>
+      <div class="caption">скинул тиктоков за год</div>
+    </section>
+    
+    <section class="slide" data-index="5">
+      <div class="avatar">
+        <img src="images/user1097835763.jpg" alt="Аватар Король подкастов" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
+      </div>
+      <h2>Король подкастов</h2>
+      <div class="subtitle">1013</div>
+      <div class="caption">кружков записано за год</div>
+    </section>
+    
+    <section class="slide" data-index="6">
+      <div class="avatar">
+        <img src="images/user1220242233.jpg" alt="Аватар Фотограф года" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
+      </div>
+      <h2>Фотограф года</h2>
+      <div class="subtitle">640 фото</div>
+      <div class="caption">скинул больше всех фото за год</div>
+    </section>
+    
+    <section class="slide" data-index="7">
+      <div class="avatar">
+        <img src="images/user1810121331.jpg" alt="Аватар Самый длинный рассказчик" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
+      </div>
+      <h2>Самый длинный рассказчик</h2>
+      <div class="subtitle">58 символов в среднем</div>
+      <div class="caption">пишет самые длинные сообщения</div>
+    </section>
+    
+    <section class="slide" data-index="8">
+      <div class="avatar">
+        <img src="images/user1220242233.jpg" alt="Аватар Чемпион по дням" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
+      </div>
+      <h2>Чемпион по дням</h2>
+      <div class="subtitle">316 дней активности</div>
+      <div class="caption">писал почти каждый день в году</div>
+    </section>
+    
+    <section class="slide" data-index="9">
+      <div class="avatar">
+        <img src="images/user1220242233.jpg" alt="Аватар Они любили сплетничать" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
+      </div>
+      <h2>Они любили сплетничать</h2>
+      <div class="subtitle">560</div>
+      <div class="caption">переслал сообщений за год</div>
+    </section>
+    
+    <section class="slide" data-index="10">
+      <div class="avatar">
+        <img src="images/user1097835763.jpg" alt="Аватар Любимец чата" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
+      </div>
+      <h2>Любимец чата</h2>
+      <div class="subtitle">54 упоминаний @ddavidok</div>
+      <div class="caption">его чаще всех тегали через @</div>
+    </section>
+    
+    <section class="slide" data-index="11">
+      <div class="avatar">
+        <img src="images/user774725636.jpg" alt="Аватар Тихий согл..." onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
+      </div>
+      <h2>Тихий согл...</h2>
+      <div class="subtitle">1585 реакций</div>
+      <div class="caption">поставил больше всех реакций за год</div>
+    </section>
+    
+    <section class="slide" data-index="12">
+      <div class="avatar">
+        <img src="images/user1220242233.jpg" alt="Аватар Приз зрительских симпатий" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
+      </div>
+      <h2>Приз зрительских симпатий</h2>
+      <div class="subtitle">1512 реакций</div>
+      <div class="caption">получил больше всего реакций за год</div>
+    </section>
+    
+    <section class="slide" data-index="13">
+      <div class="avatar">
+        <img src="images/user1296883587.jpg" alt="Аватар Миллинеал года" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
+      </div>
+      <h2>Миллинеал года</h2>
+      <div class="subtitle">427 эмодзи</div>
+      <div class="caption">использовал эмодзи в этом году</div>
+    </section>
+    
+    <section class="slide" data-index="14">
+      <div class="avatar">
+        <img src="images/1.jpg" alt="Аватар Ты умрешь и т.д." onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
+      </div>
+      <h2>Ты умрешь и т.д.</h2>
+      <div class="subtitle">эмоджи ☠</div>
+      <div class="caption">использовался 123 раз</div>
+    </section>
+    
+    <section class="slide" data-index="15">
+      <div class="avatar">
+        <img src="images/user1097835763.jpg" alt="Аватар Коллекционер стикеров" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
+      </div>
+      <h2>Коллекционер стикеров</h2>
+      <div class="subtitle">90 стикеров</div>
+      <div class="caption">отправил стикеров за год</div>
+    </section>
+    
+    <section class="slide" data-index="16">
+      <div class="avatar">
+        <img src="images/1.jpg" alt="Аватар Базарили больше всего" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ff4c6b\'/><text x=\'50%\' y=\'50%\' font-size=\'40\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\'>?</text></svg>'"/>
+      </div>
+      <h2>Базарили больше всего</h2>
+      <div class="subtitle">Tuesday, 7 January</div>
+      <div class="caption">912 сообщений за день</div>
+    </section>
+    
+  </div>
 
-    <div class="controls">
-      <button class="btn" id="prev">← Пред.</button>
-      <button class="btn" id="next">След. →</button>
-    </div>
-    <div class="pager" id="pager"></div>
-  </main>
+  <div class="controls">
+    <button class="btn" id="prev">← Пред.</button>
+    <button class="btn" id="next">След. →</button>
+  </div>
+  <div class="pager" id="pager"></div>
+</main>
 
-  <script>
-    (function(){
-      const slides = Array.from(document.querySelectorAll('.slide'));
-      const pager = document.getElementById('pager');
-      let idx = 0;
-      if(!slides.length) return;
+<script>
+(function(){
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const pager = document.getElementById('pager');
+  let idx = 0;
+  if(!slides.length) return;
 
-      function show(i){
-        idx = (i + slides.length) % slides.length;
-        slides.forEach(s=>s.classList.remove('active'));
-        slides[idx].classList.add('active');
-        Array.from(pager.children).forEach((d,di)=>d.classList.toggle('active', di===idx));
-      }
+  function show(i){
+    idx = (i + slides.length) % slides.length;
+    slides.forEach(s=>s.classList.remove('active'));
+    slides[idx].classList.add('active');
+    Array.from(pager.children).forEach((d,di)=>d.classList.toggle('active', di===idx));
+  }
 
-      slides.forEach((_,i)=>{
-        const d = document.createElement('div');
-        d.className = 'dot';
-        d.title = String(i+1);
-        d.addEventListener('click', ()=>show(i));
-        pager.appendChild(d);
-      });
+  slides.forEach((_,i)=>{
+    const d = document.createElement('div');
+    d.className = 'dot';
+    d.title = String(i+1);
+    d.addEventListener('click', ()=>show(i));
+    pager.appendChild(d);
+  });
 
-      document.getElementById('prev').addEventListener('click', ()=>show(idx-1));
-      document.getElementById('next').addEventListener('click', ()=>show(idx+1));
-      window.addEventListener('keydown', e=>{if(e.key==='ArrowLeft') show(idx-1); if(e.key==='ArrowRight') show(idx+1);});
-      show(0);
+  document.getElementById('prev').addEventListener('click', ()=>show(idx-1));
+  document.getElementById('next').addEventListener('click', ()=>show(idx+1));
+  window.addEventListener('keydown', e=>{
+    if(e.key==='ArrowLeft') show(idx-1);
+    if(e.key==='ArrowRight') show(idx+1);
+  });
 
-      // Random snow generation
-      const snowCount = 100;
-      for(let i=0; i<snowCount; i++){
-        const flake = document.createElement('div');
-        flake.className = 'snowflake';
-        flake.style.left = Math.random()*100 + 'vw';
-        flake.style.width = flake.style.height = (Math.random()*4 + 4) + 'px';
-        flake.style.opacity = Math.random()*0.5 + 0.5;
-        flake.style.animationDuration = (Math.random()*5 + 5) + 's';
-        flake.style.animationDelay = Math.random()*5 + 's';
-        document.body.appendChild(flake);
-      }
-    })();
-  </script>
+  show(0);
+
+  // Random snow
+  const snowCount = 100;
+  for(let i=0; i<snowCount; i++){
+    const flake = document.createElement('div');
+    flake.className = 'snowflake';
+    flake.style.left = Math.random()*100 + 'vw';
+    flake.style.width = flake.style.height = (Math.random()*4 + 4) + 'px';
+    flake.style.opacity = Math.random()*0.5 + 0.5;
+    flake.style.animationDuration = (Math.random()*5 + 5) + 's';
+    flake.style.animationDelay = Math.random()*5 + 's';
+    document.body.appendChild(flake);
+  }
+})();
+</script>
+
 </body>
 </html>
